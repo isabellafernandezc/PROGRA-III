@@ -1,2 +1,46 @@
 % ACTIVIDAD # 2: BACTRACKING GRAFO DIRIGIDO
 
+ruta(edmonton,saskatoon,12).
+ruta(saskatoon,winniepeg,20).
+ruta(regina,saskatoon,7).
+ruta(regina,winniepeg,4).
+ruta(calgary,regina,14).
+ruta(calgary,edmonton,4).
+ruta(vancouver,edmonton,16).
+ruta(vancouver,calgary,13).
+ruta(saskatoon,calgary,9).
+
+%-------------------------------------REGLAS----------------------------------
+
+
+
+
+
+%-----------------------------------CONSULTAS (TAMBIÉN VISIBLES EN EL INFORME):
+% 1) Existe una conexión entre Saskatoon y Vancouver? 
+% 		conexion(saskatoon,vancouver):
+% 			Respuesta esperada: False
+
+% 2) Con qué nodos está conectado Regina y cual es el costo de cada conexion?
+% 		conexion(regina,X,D).
+%			Respuesta esperada:
+%		Resultado 1:	D= 7
+%						X= Saskatoon
+%		Resultado 2:	D= 4
+%						X= Winniepeg
+%		Resultado 3:	D= 14
+%						X= Calgary
+%						
+% 3) Regla para determinar si un nodo tiene aristas:
+% 		aristas(vancouver).
+%			Respuesta esperada:
+%					true
+%					
+% 4) Regla para determinar cual es el costo para ir de un nodo X a Z pasando por Y.
+% 		rutatriple(vancouver,saskatoon, regina).
+%			-Respuesta esperada: 
+%				Falso (no es posible una ruta que conecte a los 3)
+%			-rutatriple(edmonton,saskatoon,winniepeg,C).
+%				C= 32 (12+20)
+%					
+% 5) Es posible viajar desde Edmonton a Calgary?
