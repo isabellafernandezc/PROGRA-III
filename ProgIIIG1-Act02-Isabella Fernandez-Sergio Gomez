@@ -47,31 +47,35 @@ hay_ruta(Origen , Destino, CiudadOrigen, Costo):- % Caso recursivo: Existe una r
 
 %---------------------- CONSULTAS ---------------------------
 % 1) Existe una conexión entre Saskatoon y Vancouver? 
-% 		?- hay_ruta_directa(saskatoon, vancouver, _).
-%        Respuesta esperada: False
-%     ?- hay_ruta_directa(regina, winniepeg, _).
-%        Respuesta esperada: True
+% 		?-	hay_ruta_directa(saskatoon, vancouver, _).
+%       	Respuesta esperada: False
+%       		
+%     	?-	hay_ruta_directa(regina, winniepeg, _).
+%        	Respuesta esperada: True
 
 % 2) Con qué nodos está conectado Regina y cual es el costo de cada conexion?
-% 		?- hay_ruta_directa(regina, X , C).
-%        Respuesta esperada:
-%		        Resultado 1:	C = 7
-%						              X = Saskatoon
-%		        Resultado 2:	C = 4
-%						              X = Winniepeg
+% 		?-	hay_ruta_directa(regina, X , C).
+%        	Respuesta esperada:
+%				Resultado 1: C = 7
+%						     X = Saskatoon
+%						        
+%		        Resultado 2: C = 4
+%						     X = Winniepeg
 	
 % 3) Regla para determinar si un nodo tiene aristas:
-% 		?- aristas(vancouver).
-%			   Respuesta esperada: True
-%     ?- aristas(winniepeg).
-%        Respuesta esperada: True
+% 		?-	aristas(vancouver).
+%			Respuesta esperada: True
+%			
+%     	?-	aristas(winniepeg).
+%			Respuesta esperada: True
 
 % 4) Regla para determinar cual es el costo para ir de un nodo X a Z pasando por Y.
-% 		?- viaje(vancouver, winniepeg, C).
-%			   Respuesta esperada: C = 48	
-%			?- viaje(calgary, saskatoon, C).
-%				 Respuesta esperada: C = 21
+% 		?-	viaje(vancouver, winniepeg, C).
+%			Respuesta esperada: C = 48	
+%			
+%		?-	viaje(calgary, saskatoon, C).
+%			Respuesta esperada: C = 21
 			
 % 5) Es posible viajar desde Edmonton a Calgary?
-%     ?- viaje(edmonton, calgary, _).
-%        Respuesta esperada: True
+%		?-	viaje(edmonton, calgary, _).
+%        	Respuesta esperada: True
