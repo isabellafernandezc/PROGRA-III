@@ -1,0 +1,96 @@
+% --------------------- HECHOS ------------------------------------
+padre(abraham,
+      [hijo(herbert),
+       hijo(homero)
+      ]).
+padre(clancy,
+      [hija(herbert),
+       hija(homero),
+       hija(selma)
+      ]).
+padre(homero,
+      [hijo(bart),
+       hija(lisa),
+       hija(maggie)
+      ]).
+
+madre(mona,herbert).
+madre(mona, homero).
+madre(jacqueline, marge).
+madre(jacqueline,patty).
+madre(jacqueline,selma).
+madre(marge,bart).
+madre(marge,lisa).
+madre(marge,maggie).
+madre(selma,ling).
+
+% ------------------------- REGLAS -----------------------------------
+% X es padre de Y si hay una conexion entre ellos
+es_padre(X, Y):-
+      padre(Y, L),
+      member(X, L).
+
+% X es madre de Y si hay una conexion entre ellos
+es_madre(X, Y):-
+      madre(Y, L),
+      member(X, L).
+
+% X es hijo de Y si Y es padre de X o madre de X.
+es_hijo(X, Y):-
+      es_padre(Y, X);
+      es_madre(Y, X).
+/*
+X es abuelo de Y si existe un Z tal que:
+1. Z es hijo de X
+2. Z es padre o madre de Y
+*/
+es_abuelo(X, Y):-
+      es_hijo(Z, X),
+      (es_padre(Z, Y); es_madre(Z, Y)).
+
+/*
+X es hermano de Y si:
+1. Comparte un mismo progenitor Z
+2. X es diferente de Y
+*/
+es_hermano(X, Y):-
+      es_hijo(X, Z),
+      es_hijo(Y, Z),
+      X \= Y.
+
+/*
+X es tío de Y si:
+1. X es hermano de Z
+2. Y es hijo de Z
+*/
+es_tio(X, Y):-
+      es_hermano(X, Z),
+      es_hijo(Y, Z).
+
+/*
+X es primo de Y si:
+1. El padre/madre de X es A
+2. El padre/madre de Y es B
+3. A y B son hermanos
+*/
+es_primo(X, Y):-
+      es_hijo(X, A),
+      es_hijo(Y, B),
+      es_hermano(A, B).
+
+% X es nieto de Y si Y es abuelo de X.
+es_nieto(X, Y):-
+      es_abuelo(Y, X).
+
+% Consultas:
+% abuel@ paterno: abuelo(abraham,lisa).
+% ->true
+% abuel@ materno: abuelo(clancy, maggie).
+% ->true
+% ti@ materno: tio(patty, maggie).
+% ->true
+% ti@ paterno: tio(herbert,lisa)
+% ->true
+% tio(herbert,ling)
+% ->false
+
