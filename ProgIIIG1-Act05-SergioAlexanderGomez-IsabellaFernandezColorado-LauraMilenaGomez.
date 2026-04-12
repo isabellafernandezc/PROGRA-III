@@ -4,9 +4,9 @@ padre(abraham,
        hijo(homero)
       ]).
 padre(clancy,
-      [hija(herbert),
-       hija(homero),
-       hija(selma)
+      [hija(patty),
+       hija(selma), 
+       hija(marge)
       ]).
 padre(homero,
       [hijo(bart),
