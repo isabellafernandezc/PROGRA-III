@@ -14,15 +14,25 @@ padre(homero,
        hija(maggie)
       ]).
 
-madre(mona,herbert).
-madre(mona, homero).
-madre(jacqueline, marge).
-madre(jacqueline,patty).
-madre(jacqueline,selma).
-madre(marge,bart).
-madre(marge,lisa).
-madre(marge,maggie).
-madre(selma,ling).
+madre(mona,
+      [hijo(hebert),
+       hijo(homero)
+      ]).
+
+madre(jaqqueline,
+      [hija(marge),
+       hija(patty),
+       hija(selma)
+      ]).
+
+madre(marge,
+      [hijo(bart),
+       hija(lisa),
+       hija(maggie)
+      ]).
+
+madre(selma,
+      [hija(ling)]).
 
 % ------------------------- REGLAS -----------------------------------
 % X es padre de Y si hay una conexion entre ellos
