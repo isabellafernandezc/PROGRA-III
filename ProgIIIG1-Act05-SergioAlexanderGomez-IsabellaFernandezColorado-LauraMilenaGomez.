@@ -97,14 +97,14 @@ es_nieto(X, Y):-
       es_abuelo(Y, X).
 
 % Consultas:
-% abuel@ paterno: abuelo(abraham,lisa).
+% abuel@ paterno: es_abuelo(abraham,lisa).
 % ->true
-% abuel@ materno: abuelo(clancy, maggie).
+% abuel@ materno: es_abuelo(clancy, maggie).
 % ->true
-% ti@ materno: tio(patty, maggie).
+% ti@ materno: es_tio(patty, maggie).
 % ->true
-% ti@ paterno: tio(herbert,lisa)
+% ti@ paterno: es_tio(herbert,lisa)
 % ->true
-% tio(herbert,ling)
+% es_tio(herbert,ling)
 % ->false
 
