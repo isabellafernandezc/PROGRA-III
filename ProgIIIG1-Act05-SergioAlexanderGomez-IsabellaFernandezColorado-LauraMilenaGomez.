@@ -15,7 +15,7 @@ padre(homero,
       ]).
 
 madre(mona,
-      [hijo(hebert),
+      [hijo(herbert),
        hijo(homero)
       ]).
 
@@ -37,13 +37,17 @@ madre(selma,
 % ------------------------- REGLAS -----------------------------------
 % X es padre de Y si hay una conexion entre ellos
 es_padre(X, Y):-
-      padre(Y, L),
-      member(X, L).
+      padre(X, L),
+      member(hijo(Y), L);
+      padre(X,L),
+      member(hija(Y), L).
 
 % X es madre de Y si hay una conexion entre ellos
 es_madre(X, Y):-
-      madre(Y, L),
-      member(X, L).
+      madre(X, L),
+      member(hijo(Y), L);
+      madre(X, L),
+      member(hija(Y), L).
 
 % X es hijo de Y si Y es padre de X o madre de X.
 es_hijo(X, Y):-
