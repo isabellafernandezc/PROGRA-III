@@ -12,23 +12,29 @@
 % saskatoon--9---->calgary
 
 %---------------------- HECHOS -----------------------------
-ruta(edmonton,saskatoon,12).
-ruta(saskatoon,winniepeg,20).
-ruta(regina,saskatoon,7).
-ruta(regina,winniepeg,4).
-ruta(calgary,regina,14).
-ruta(calgary,edmonton,4).
-ruta(vancouver,edmonton,16).
-ruta(vancouver,calgary,13).
-ruta(saskatoon,calgary,9).
+ruta(ciudad(edmonton),
+     [destino(ciudad(saskatoon), costo(12))
+     ]).
+ruta(ciudad(saskatoon),
+     [destino(ciudad(winniepeg), costo(20)),
+      destino(ciudad(calgary), costo(9))
+     ]).
+ruta(ciudad(regina),
+     [destino(ciudad(saskatoon), costo(7)),
+      destino(ciudad(winniepeg), costo(4))
+     ]).
+
+
 
 %------------------------ REGLAS -----------------------------
 aristas(X):-	% Comprueba que una ciudad tenga aristas, ya sea de entrada o salida
-    ruta(X,_,_), !;
-    ruta(_,X,_). 
+    ruta(ciudad(X),_), !;
+    ruta(_, Lista), member(destino(ciudad(X), _), Lista).
 
-hay_ruta_directa(Origen, Destino, Costo):- % Comprueba si hay una ruta directa entre 2 ciudades
-    ruta(Origen, Destino, Costo).
+hay_conexion(Ciudad_origen, Destino, Costo):- 
+    ruta(ciudad(Ciudad_origen), Lista),
+    member(destino(ciudad(Destino), costo(Costo)), Lista).
+
 
 % Regla recursiva
 viaje(Origen, Destino, Costo):- % Comprueba si existe una ruta entre 2 ciudades pasando por otras ciudades
