@@ -23,8 +23,14 @@ ruta(ciudad(regina),
      [destino(ciudad(saskatoon), costo(7)),
       destino(ciudad(winniepeg), costo(4))
      ]).
-
-
+ruta(ciudad(calgary),
+     [destino(ciudad(regina), costo(14)),
+      destino(ciudad(edmonton), costo(4))
+     ]).
+ruta(ciudad(vancouver),
+     [destino(ciudad(edmonton), costo(16)),
+      destino(ciudad(calgary), costo(13))
+     ]).
 
 %------------------------ REGLAS -----------------------------
 aristas(X):-	% Comprueba que una ciudad tenga aristas, ya sea de entrada o salida
@@ -41,8 +47,9 @@ viaje(Origen, Destino, Costo):- % Comprueba si existe una ruta entre 2 ciudades 
     hay_ruta(Origen, Destino, Origen, Costo). /* Se envia el origen para comparar ciudades intermedias 
                                                * y no volver a pasar por el origen */
 
-hay_ruta(Origen, Destino, _ ,Costo):-  % caso base: existe una ruta desde una ciudad a otra
-  	ruta(Origen, Destino, Costo).
+hay_ruta(Origen, Destino, _, Costo):- % caso base: existe una ruta desde una ciudad a otra
+    ruta(Origen, Lista),
+    member(destino(Destino, costo(Costo)), Lista).
 
 hay_ruta(Origen , Destino, CiudadOrigen, Costo):- % Caso recursivo: Existe una ruta desde una ciudad a otra pasando por una ciudad intermedia
     ruta(Origen , Intermedio , Costo_1),
