@@ -48,11 +48,12 @@ viaje(Origen, Destino, Costo):- % Comprueba si existe una ruta entre 2 ciudades 
                                                * y no volver a pasar por el origen */
 
 hay_ruta(Origen, Destino, _, Costo):- % caso base: existe una ruta desde una ciudad a otra
-    ruta(Origen, Lista),
-    member(destino(Destino, costo(Costo)), Lista).
+    ruta(ciudad(Origen), Lista),
+    member(destino(ciudad(Destino), costo(Costo)), Lista).
 
 hay_ruta(Origen , Destino, CiudadOrigen, Costo):- % Caso recursivo: Existe una ruta desde una ciudad a otra pasando por una ciudad intermedia
-    ruta(Origen , Intermedio , Costo_1),
+    ruta(ciudad(Origen), Lista),
+    member(destino(ciudad(Intermedio), costo(Costo_1)), Lista),
     Intermedio \= CiudadOrigen,  % Comprueba que la ciudad intermedio no sea la ciudad original, con el fin de evitar ciclos infinitos 
     hay_ruta(Intermedio, Destino, CiudadOrigen ,Costo_2),
     Costo is Costo_1 + Costo_2,
@@ -60,14 +61,14 @@ hay_ruta(Origen , Destino, CiudadOrigen, Costo):- % Caso recursivo: Existe una r
 
 %---------------------- CONSULTAS ---------------------------
 % 1) Existe una conexión entre Saskatoon y Vancouver? 
-% 		?-	hay_ruta_directa(saskatoon, vancouver, _).
+% 		?-	hay_conexion(saskatoon, vancouver, _).
 %       	Respuesta esperada: False
 %       		
-%     	?-	hay_ruta_directa(regina, winniepeg, _).
+%     	?-	hay_conexion(regina, winniepeg, _).
 %        	Respuesta esperada: True
 
 % 2) Con qué nodos está conectado Regina y cual es el costo de cada conexion?
-% 		?-	hay_ruta_directa(regina, X , C).
+% 		?-	hay_conexion(regina, X , C).
 %        	Respuesta esperada:
 %				Resultado 1: C = 7
 %						     X = Saskatoon
